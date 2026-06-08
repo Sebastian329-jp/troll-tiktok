@@ -5,7 +5,7 @@
 </head>
 <body style="background-color: transparent;">
     <div id="alerta" style="font-size: 50px; color: white; font-family: sans-serif; text-shadow: 2px 2px 4px #000;">
-        Esperando conexión...
+    
     </div>
 
     <script>
@@ -14,30 +14,10 @@
             "https://vpvjbkgiivmkgvmngkpg.supabase.co", 
             "sb_publishable_VduZ0tLuV8v1R3xiU-9Ysw_nZEadoS0"
         );
-        supabase
-  .channel('public:regalos')
-  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'regalos' }, payload => {
-    document.getElementById('alerta').innerText = '¡Nuevo regalo recibido!';
-    setTimeout(() => { document.getElementById('alerta').innerText = ''; }, 5000);
-  })
-  .subscribe();
-
-        const alertaDiv = document.getElementById('alerta');
-
-        // Conectar y escuchar
-        supabase
-          .channel('any')
-          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'alertas' }, payload => {
-            console.log("Evento recibido:", payload);
-            alertaDiv.innerText = "¡Nuevo regalo de: " + payload.new.usuario + "!";
-            setTimeout(() => { alertaDiv.innerText = ""; }, 5000);
-          })
-          .subscribe((status) => {
-            console.log("Estado de conexión:", status);
-            if(status === 'SUBSCRIBED') {
-                alertaDiv.innerText = "Conectado. Esperando regalos...";
-            }
-          });
-    </script>
-</body>
-</html>
+  supabase
+        .channel('public:regalos')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'regalos' }, payload => {
+          document.getElementById('alerta').innerText = '¡Nuevo regalo recibido!';
+          setTimeout(() => { document.getElementById('alerta').innerText = ''; }, 5000);
+        })
+        .subscribe();
