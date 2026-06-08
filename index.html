@@ -7,20 +7,7 @@
     <div id="alerta" style="font-size: 50px; color: white; font-family: sans-serif; text-shadow: 2px 2px 4px #000;">
     
     </div>
-
     <script>
-        // Configuración única
-        const supabase = supabase.createClient(
-            "https://vpvjbkgiivmkgvmngkpg.supabase.co", 
-            "sb_publishable_VduZ0tLuV8v1R3xiU-9Ysw_nZEadoS0"
-        );
-  supabase
-        .channel('public:regalos')
-        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'regalos' }, payload => {
-          document.getElementById('alerta').innerText = '¡Nuevo regalo recibido!';
-          setTimeout(() => { document.getElementById('alerta').innerText = ''; }, 5000);
-        })
-        <script>
   try {
     const supabase = supabase.createClient(
       "https://vpvjbkgiivmkgvmngkpg.supabase.co",
@@ -31,8 +18,9 @@
     supabase
       .channel('public:regalos')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'regalos' }, payload => {
-        console.log("¡Regalo detectado!", payload);
+        console.log("¡Regalo detectado!");
         document.getElementById('alerta').innerText = '¡Nuevo regalo recibido!';
+        setTimeout(() => { document.getElementById('alerta').innerText = ''; }, 5000);
       })
       .subscribe();
       
