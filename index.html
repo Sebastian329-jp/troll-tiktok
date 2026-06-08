@@ -9,10 +9,10 @@
     </div>
     <script>
   try {
-    const supabase = supabase.createClient(
-      "https://vpvjbkgiivmkgvmngkpg.supabase.co",
-      "sb_publishable_VduZ0tLuv8v1R3xiU-9Ysw_nZEadoS0"
-    );
+    const supabase = window.supabase.createClient(
+  "https://vpvjbkgiivmkgvmngkpg.supabase.co",
+  "sb_publishable_VduZ0tLuv8v1R3xiU-9Ysw_nZEadoS0"
+);
     console.log("Supabase cargó correctamente");
     
     supabase
