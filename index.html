@@ -20,5 +20,23 @@
           document.getElementById('alerta').innerText = '¡Nuevo regalo recibido!';
           setTimeout(() => { document.getElementById('alerta').innerText = ''; }, 5000);
         })
-        .subscribe();
-        console.log("Conectado a Supabase correctamente");
+        <script>
+  try {
+    const supabase = supabase.createClient(
+      "https://vpvjbkgiivmkgvmngkpg.supabase.co",
+      "sb_publishable_VduZ0tLuv8v1R3xiU-9Ysw_nZEadoS0"
+    );
+    console.log("Supabase cargó correctamente");
+    
+    supabase
+      .channel('public:regalos')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'regalos' }, payload => {
+        console.log("¡Regalo detectado!", payload);
+        document.getElementById('alerta').innerText = '¡Nuevo regalo recibido!';
+      })
+      .subscribe();
+      
+  } catch (e) {
+    console.error("Error al cargar Supabase:", e);
+  }
+</script>
