@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body style="background-color: transparent;">
-    <div id="alerta" style="font-size: 50px; color: white; font-family: sans-serif; text-shadow: 2px 2px 4px #000;">
+    <div id="regalos" style="font-size: 50px; color: white; font-family: sans-serif; text-shadow: 2px 2px 4px #000;">
     
     </div>
     <script>
@@ -18,9 +18,9 @@
     supabase
       .channel('public:regalos')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'regalos' }, payload => {
-        console.log("¡Regalo detectado!");
-        document.getElementById('alerta').innerText = '¡Nuevo regalo recibido!';
-        setTimeout(() => { document.getElementById('alerta').innerText = ''; }, 5000);
+        console.log("¡Regalos detectado!");
+        document.getElementById('regalos').innerText = '¡Nuevo regalos recibido!';
+        setTimeout(() => { document.getElementById('regalos').innerText = ''; }, 5000);
       })
       .subscribe();
       
